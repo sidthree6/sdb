@@ -1,0 +1,127 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Simple DataBase Documention</title>
+<link href="sdb_style.css" rel="stylesheet" type="text/css" />
+<style type="text/css">
+#main
+{
+	background:#FFF;
+	padding:5px;
+	height:100%;
+	border-bottom:1px dashed #999;
+	border-left:1px dashed #999;
+	border-right:1px dashed #999;
+}
+#main a
+{
+	color:#000;
+	border-bottom:1px dotted #000;
+	text-decoration:none;
+}
+#main a:hover
+{
+	text-decoration:underline;
+}
+.main_menu
+{
+	float:none;
+	text-align:center;
+	font-size:18px;
+}
+#header a
+{
+	text-decoration:none;
+}
+#header a:hover
+{
+	text-decoration:underline;
+}
+.header_style
+{
+	color:#090;
+}
+#info_func
+{
+	margin:10px;
+	background-color:#DEDEED;
+	padding:10px;
+}
+#info_des
+{
+	margin:10px;
+	background-color:#DEDEED;
+	border:#CCC;
+	padding:10px;
+}
+.example
+{
+	padding:5px;
+	background-color:#EFEFF6;
+	border:1px solid #C9C9C9;
+}
+</style>
+</head>
+<body>
+
+<div id="header">
+	<span class="main_menu">SDB (<span class="header_style">S</span>imple <span class="header_style">D</span>ata-<span class="header_style">B</span>ase) Manual</span>
+
+    <span style="margin-left:25px;"><a href="sdb_get_table_column.html">&laquo; sdb_get_table_column</a></span> | 
+    <span><a href="sdb_init.html">sdb_init &raquo;</a></span> <span style="margin-left:20px"><a href="readme.html">(Home Page)</a></span>
+</div>
+
+<div id="main">
+
+	<h3>sdb_get_column_value</h3>
+	<div id="info_func">
+
+<strong>sdb_get_column_value ( string</strong> $table_name <strong>, string</strong> $column_name <strong>)</strong></div>
+    
+    <div id="info_des">
+    	<strong>Description:</strong>
+        <p class="example">sdb_get_column_value () Returns the value of the selected table and column</p>
+        <strong>Parameters:</strong>
+        <p class="example">$table_name | Table name from the selected database</p>
+        <p class="example">$column_name | Column name from the selected table</p>
+    </div>
+    
+    <div id="info_des">
+
+    	<strong>Examples for sdb_get_column_value</strong>
+	
+	<p class="example">
+		<strong>Example 1: Getting column value from the table</strong>
+<br/><br/>
+		<code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php
+<br /></span><span style="color: #007700">require_once(</span><span style="color: #DD0000">"db.php"</span><span style="color: #007700">);
+<br />
+<br /></span><span style="color: #0000CC">sdb_init</span><span style="color: #006600">();
+<br />
+<br /></span><span style="color: #0000BB">sdb_open_db</span><span style="color: #007700">(</span><span style="color: #DD0000">"database_name"</span><span style="color: #007700">);
+<br />
+<br /></span><span style="color: #0000BB">sdb_query</span><span style="color: #007700">(</span><span style="color: #DD0000">"CREATE&nbsp;TABLE&nbsp;table_name&nbsp;(id&nbsp;PKEY,&nbsp;name&nbsp;VARCHAR(99))"</span><span style="color: #007700">);
+
+<br /></span><span style="color: #FF8000">//&nbsp;Create&nbsp;the&nbsp;table
+<br />
+<br /></span><span style="color: #0000BB">sdb_get_column_place</span><span style="color: #007700">(</span><span style="color: #DD0000">"table_name"</span><span style="color: #007700">,</span><span style="color: #DD0000">"name"</span><span style="color: #007700">);
+<br /></span><span style="color: #FF8000">//&nbsp;Returns&nbsp;VARCHAR(99)
+<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+
+</code>
+
+        </p>
+
+        
+    </div>
+    
+<hr />
+Copyright &copy; Sidd Panchal
+</div>
+
+
+</body>
+</html>

@@ -1,0 +1,284 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Simple DataBase Documention</title>
+<link href="sdb_style.css" rel="stylesheet" type="text/css" />
+<style type="text/css">
+#main
+{
+	background:#FFF;
+	padding:5px;
+	height:100%;
+	border-bottom:1px dashed #999;
+	border-left:1px dashed #999;
+	border-right:1px dashed #999;
+}
+#main a
+{
+	color:#000;
+	border-bottom:1px dotted #000;
+	text-decoration:none;
+}
+#main a:hover
+{
+	text-decoration:underline;
+}
+.main_menu
+{
+	float:none;
+	text-align:center;
+	font-size:18px;
+}
+#header a
+{
+	text-decoration:none;
+}
+#header a:hover
+{
+	text-decoration:underline;
+}
+.header_style
+{
+	color:#090;
+}
+#info_func
+{
+	margin:10px;
+	background-color:#DEDEED;
+	padding:10px;
+}
+#info_des
+{
+	margin:10px;
+	background-color:#DEDEED;
+	border:#CCC;
+	padding:10px;
+}
+.example
+{
+	padding:5px;
+	background-color:#EFEFF6;
+	border:1px solid #C9C9C9;
+}
+</style>
+</head>
+<body>
+
+<div id="header">
+	<span class="main_menu">SDB (<span class="header_style">S</span>imple <span class="header_style">D</span>ata-<span class="header_style">B</span>ase) Manual</span>
+
+    <span style="margin-left:25px;"><a href="ex3.html">&laquo; Exapmple 3</a></span> <span style="margin-left:20px"><a href="readme.html">(Home Page)</a></span>
+</div>
+
+<div id="main">
+
+	<h3>Example 4</h3>
+	    
+    <div id="info_des">
+
+    	<strong>Example 4: Creating Usermembership with SDB API</strong>
+	
+	<p class="example">
+
+		<code><span style="color: #000000">
+---------------------register.php--------------------------&nbsp;
+<br /><span style="color: #0000BB">&lt;?php
+<br />session_start</span><span style="color: #007700">();
+<br />require_once(</span><span style="color: #DD0000">"db.php"</span><span style="color: #007700">);
+<br />
+<br /></span><span style="color: #0000CC">sdb_init</span><span style="color: #006600">();
+<br />
+<br /></span><span style="color: #0000BB">sdb_open_db</span><span style="color: #007700">(</span><span style="color: #DD0000">"user"</span><span style="color: #007700">);
+<br />
+<br />if(!</span><span style="color: #0000BB">sdb_table_exist</span><span style="color: #007700">(</span><span style="color: #DD0000">"user"</span><span style="color: #007700">))
+
+<br />{
+<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">sdb_query</span><span style="color: #007700">(</span><span style="color: #DD0000">"CREATE&nbsp;TABLE&nbsp;user&nbsp;(uid&nbsp;PKEY,username&nbsp;VARCHAR(99),password&nbsp;VARCHAR(99),email&nbsp;TEXT,gender&nbsp;VARCHAR(15),stid&nbsp;INT(99))"</span><span style="color: #007700">);
+<br />}&nbsp;
+<br />
+
+<br />if(isset(</span><span style="color: #0000BB">$_POST</span><span style="color: #007700">[</span><span style="color: #DD0000">'register'</span><span style="color: #007700">]))
+<br />{
+<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$username&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">sdb_real_escape_string</span><span style="color: #007700">(</span><span style="color: #0000BB">sdb_replace_keywords</span><span style="color: #007700">(</span><span style="color: #0000BB">$_POST</span><span style="color: #007700">[</span><span style="color: #DD0000">'username'</span><span style="color: #007700">]));
+<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$password&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">sdb_real_escape_string</span><span style="color: #007700">(</span><span style="color: #0000BB">sdb_replace_keywords</span><span style="color: #007700">(</span><span style="color: #0000BB">$_POST</span><span style="color: #007700">[</span><span style="color: #DD0000">'password'</span><span style="color: #007700">]));
+
+<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$email&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">sdb_real_escape_string</span><span style="color: #007700">(</span><span style="color: #0000BB">sdb_replace_keywords</span><span style="color: #007700">(</span><span style="color: #0000BB">$_POST</span><span style="color: #007700">[</span><span style="color: #DD0000">'email'</span><span style="color: #007700">]));
+<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$gender&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">sdb_real_escape_string</span><span style="color: #007700">(</span><span style="color: #0000BB">sdb_replace_keywords</span><span style="color: #007700">(</span><span style="color: #0000BB">$_POST</span><span style="color: #007700">[</span><span style="color: #DD0000">'gender'</span><span style="color: #007700">]));
+
+<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$stid&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">sdb_real_escape_string</span><span style="color: #007700">(</span><span style="color: #0000BB">sdb_replace_keywords</span><span style="color: #007700">(</span><span style="color: #0000BB">$_POST</span><span style="color: #007700">[</span><span style="color: #DD0000">'stid'</span><span style="color: #007700">]));
+<br />&nbsp;&nbsp;&nbsp;&nbsp;
+<br />&nbsp;&nbsp;&nbsp;&nbsp;if(empty(</span><span style="color: #0000BB">$username</span><span style="color: #007700">)&nbsp;||&nbsp;empty(</span><span style="color: #0000BB">$password</span><span style="color: #007700">)&nbsp;||&nbsp;empty(</span><span style="color: #0000BB">$email</span><span style="color: #007700">)&nbsp;||&nbsp;empty(</span><span style="color: #0000BB">$gender</span><span style="color: #007700">)&nbsp;||&nbsp;empty(</span><span style="color: #0000BB">$stid</span><span style="color: #007700">))
+
+<br />&nbsp;&nbsp;&nbsp;&nbsp;{
+<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;echo&nbsp;</span><span style="color: #DD0000">"You&nbsp;must&nbsp;fields&nbsp;are&nbsp;required&nbsp;&lt;br/&gt;"</span><span style="color: #007700">;
+<br />&nbsp;&nbsp;&nbsp;&nbsp;}
+<br />&nbsp;&nbsp;&nbsp;&nbsp;else
+<br />&nbsp;&nbsp;&nbsp;&nbsp;{
+<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$check_username&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">sdb_query</span><span style="color: #007700">(</span><span style="color: #DD0000">"SELECT&nbsp;*&nbsp;FROM&nbsp;user&nbsp;WHERE&nbsp;username='"</span><span style="color: #007700">.</span><span style="color: #0000BB">$username</span><span style="color: #007700">.</span><span style="color: #DD0000">"'"</span><span style="color: #007700">);
+
+<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(</span><span style="color: #0000BB">sdb_num_rows</span><span style="color: #007700">(</span><span style="color: #0000BB">$check_username</span><span style="color: #007700">)&nbsp;==&nbsp;</span><span style="color: #0000BB">1</span><span style="color: #007700">)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{
+<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;echo&nbsp;</span><span style="color: #DD0000">"Username&nbsp;is&nbsp;already&nbsp;taken&nbsp;&lt;br/&gt;"</span><span style="color: #007700">;
+
+<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else
+<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{
+<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">sdb_query</span><span style="color: #007700">(</span><span style="color: #DD0000">"INSERT&nbsp;INTO&nbsp;user&nbsp;(username,password,email,gender,stid)&nbsp;VALUES&nbsp;
+<br />('"</span><span style="color: #007700">.</span><span style="color: #0000BB">$username</span><span style="color: #007700">.</span><span style="color: #DD0000">"','"</span><span style="color: #007700">.</span><span style="color: #0000BB">$password</span><span style="color: #007700">.</span><span style="color: #DD0000">"','"</span><span style="color: #007700">.</span><span style="color: #0000BB">$email</span><span style="color: #007700">.</span><span style="color: #DD0000">"','"</span><span style="color: #007700">.</span><span style="color: #0000BB">$gender</span><span style="color: #007700">.</span><span style="color: #DD0000">"','"</span><span style="color: #007700">.</span><span style="color: #0000BB">$stid</span><span style="color: #007700">.</span><span style="color: #DD0000">"')"</span><span style="color: #007700">);
+
+<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;echo&nbsp;</span><span style="color: #DD0000">"You&nbsp;are&nbsp;successfully&nbsp;registered,&nbsp;Now&nbsp;you&nbsp;can&nbsp;&lt;a&nbsp;href=\"login.php\"&gt;Login&lt;/a&gt;"</span><span style="color: #007700">;
+<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+<br />&nbsp;&nbsp;&nbsp;&nbsp;}
+<br />}
+
+<br />
+<br /></span><span style="color: #0000BB">?&gt;
+<br /></span>&lt;form&nbsp;action="register.php"&nbsp;method="post"&gt;
+<br />&lt;table&gt;
+<br />&lt;tr&gt;&lt;td&gt;Username:&nbsp;&lt;/td&gt;&lt;td&gt;&lt;input&nbsp;type="text"&nbsp;name="username"&nbsp;/&gt;&lt;/td&gt;&lt;/tr&gt;
+
+<br />&lt;tr&gt;&lt;td&gt;Password:&nbsp;&lt;/td&gt;&lt;td&gt;&lt;input&nbsp;type="password"&nbsp;name="password"&nbsp;/&gt;&lt;/td&gt;&lt;/tr&gt;
+<br />&lt;tr&gt;&lt;td&gt;Email:&nbsp;&lt;/td&gt;&lt;td&gt;&lt;input&nbsp;type="text"&nbsp;name="email"&nbsp;/&gt;&lt;/td&gt;&lt;/tr&gt;
+
+<br />&lt;tr&gt;&lt;td&gt;Gender:&nbsp;&lt;/td&gt;&lt;td&gt;&nbsp;Male&lt;input&nbsp;type="radio"&nbsp;name="gender"&nbsp;value="male"&nbsp;checked&nbsp;/&gt;
+<br />&nbsp;Female&lt;input&nbsp;type="radio"&nbsp;name="gender"&nbsp;value="female"&nbsp;/&gt;&lt;/td&gt;&lt;/tr&gt;
+
+<br />&lt;tr&gt;&lt;td&gt;Student&nbsp;ID:&nbsp;&lt;/td&gt;&lt;td&gt;&lt;input&nbsp;type="text"&nbsp;name="stid"&nbsp;/&gt;&lt;/td&gt;&lt;/tr&gt;
+<br />&lt;tr&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;&lt;input&nbsp;type="submit"&nbsp;value="Register"&nbsp;name="register"&nbsp;/&gt;&lt;/td&gt;&lt;/tr&gt;
+
+<br />&lt;/table&gt;
+<br />&lt;/form&gt;
+<br />&lt;a&nbsp;href='login.php'&gt;Login&nbsp;from&nbsp;here&lt;/a&gt;
+<br /><span style="color: #0000BB">&lt;?php
+<br />sdb_close_db</span><span style="color: #007700">();
+<br /></span><span style="color: #0000BB">?&gt;
+<br /></span>
+
+<br />---------------------login.php--------------------------&nbsp;
+<br />
+<br /><span style="color: #0000BB">&lt;?php
+<br />session_start</span><span style="color: #007700">();
+<br />require_once(</span><span style="color: #DD0000">"db.php"</span><span style="color: #007700">);
+<br />
+<br /></span><span style="color: #0000CC">sdb_init</span><span style="color: #006600">();
+<br />
+<br /></span><span style="color: #0000BB">sdb_open_db</span><span style="color: #007700">(</span><span style="color: #DD0000">"user"</span><span style="color: #007700">);
+<br />
+<br />if(!</span><span style="color: #0000BB">sdb_table_exist</span><span style="color: #007700">(</span><span style="color: #DD0000">"user"</span><span style="color: #007700">))
+
+<br />{
+<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">sdb_query</span><span style="color: #007700">(</span><span style="color: #DD0000">"CREATE&nbsp;TABLE&nbsp;user&nbsp;(uid&nbsp;PKEY,username&nbsp;VARCHAR(99),password&nbsp;VARCHAR(99),email&nbsp;TEXT,gender&nbsp;VARCHAR(15),stid&nbsp;INT(99))"</span><span style="color: #007700">);
+<br />}&nbsp;
+<br />
+
+<br />if(isset(</span><span style="color: #0000BB">$_POST</span><span style="color: #007700">[</span><span style="color: #DD0000">'login'</span><span style="color: #007700">]))
+<br />{
+<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$username&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">sdb_real_escape_string</span><span style="color: #007700">(</span><span style="color: #0000BB">sdb_replace_keywords</span><span style="color: #007700">(</span><span style="color: #0000BB">$_POST</span><span style="color: #007700">[</span><span style="color: #DD0000">'username'</span><span style="color: #007700">]));
+<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$password&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">sdb_real_escape_string</span><span style="color: #007700">(</span><span style="color: #0000BB">sdb_replace_keywords</span><span style="color: #007700">(</span><span style="color: #0000BB">$_POST</span><span style="color: #007700">[</span><span style="color: #DD0000">'password'</span><span style="color: #007700">]));
+
+<br />&nbsp;&nbsp;&nbsp;&nbsp;
+<br />&nbsp;&nbsp;&nbsp;&nbsp;if(empty(</span><span style="color: #0000BB">$username</span><span style="color: #007700">)&nbsp;||&nbsp;empty(</span><span style="color: #0000BB">$password</span><span style="color: #007700">))
+<br />&nbsp;&nbsp;&nbsp;&nbsp;{
+<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;echo&nbsp;</span><span style="color: #DD0000">"You&nbsp;must&nbsp;fields&nbsp;are&nbsp;required&nbsp;&lt;br/&gt;"</span><span style="color: #007700">;
+
+<br />&nbsp;&nbsp;&nbsp;&nbsp;}
+<br />&nbsp;&nbsp;&nbsp;&nbsp;else
+<br />&nbsp;&nbsp;&nbsp;&nbsp;{
+<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$check_login&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">sdb_query</span><span style="color: #007700">(</span><span style="color: #DD0000">"SELECT&nbsp;*&nbsp;FROM&nbsp;user&nbsp;WHERE&nbsp;username='"</span><span style="color: #007700">.</span><span style="color: #0000BB">$username</span><span style="color: #007700">.</span><span style="color: #DD0000">"'&nbsp;AND&nbsp;password='"</span><span style="color: #007700">.</span><span style="color: #0000BB">$password</span><span style="color: #007700">.</span><span style="color: #DD0000">"'"</span><span style="color: #007700">);
+
+<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(</span><span style="color: #0000BB">sdb_num_rows</span><span style="color: #007700">(</span><span style="color: #0000BB">$check_login</span><span style="color: #007700">)&nbsp;==&nbsp;</span><span style="color: #0000BB">1</span><span style="color: #007700">)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{
+<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$_SESSION</span><span style="color: #007700">[</span><span style="color: #DD0000">'username'</span><span style="color: #007700">]&nbsp;=&nbsp;</span><span style="color: #0000BB">$check_login</span><span style="color: #007700">[</span><span style="color: #DD0000">'username'</span><span style="color: #007700">][</span><span style="color: #0000BB">0</span><span style="color: #007700">];
+
+<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$_SESSION</span><span style="color: #007700">[</span><span style="color: #DD0000">'email'</span><span style="color: #007700">]&nbsp;=&nbsp;</span><span style="color: #0000BB">$check_login</span><span style="color: #007700">[</span><span style="color: #DD0000">'email'</span><span style="color: #007700">][</span><span style="color: #0000BB">0</span><span style="color: #007700">];
+<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$_SESSION</span><span style="color: #007700">[</span><span style="color: #DD0000">'stid'</span><span style="color: #007700">]&nbsp;=&nbsp;</span><span style="color: #0000BB">$check_login</span><span style="color: #007700">[</span><span style="color: #DD0000">'stid'</span><span style="color: #007700">][</span><span style="color: #0000BB">0</span><span style="color: #007700">];
+
+<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$_SESSION</span><span style="color: #007700">[</span><span style="color: #DD0000">'loggedin'</span><span style="color: #007700">]&nbsp;=&nbsp;</span><span style="color: #0000BB">1</span><span style="color: #007700">;
+<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">header</span><span style="color: #007700">(</span><span style="color: #DD0000">"Location:&nbsp;member.php"</span><span style="color: #007700">);
+<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else
+<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{
+<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;echo&nbsp;</span><span style="color: #DD0000">"Invalid&nbsp;Username&nbsp;or&nbsp;password,&nbsp;please&nbsp;try&nbsp;again&lt;br/&gt;"</span><span style="color: #007700">;
+
+<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+<br />&nbsp;&nbsp;&nbsp;&nbsp;}
+<br />}
+<br />
+<br /></span><span style="color: #0000BB">?&gt;
+<br /></span>&lt;form&nbsp;action="login.php"&nbsp;method="post"&gt;
+<br />&lt;table&gt;
+<br />&lt;tr&gt;&lt;td&gt;Username:&nbsp;&lt;/td&gt;&lt;td&gt;&lt;input&nbsp;type="text"&nbsp;name="username"&nbsp;/&gt;&lt;/td&gt;&lt;/tr&gt;
+
+<br />&lt;tr&gt;&lt;td&gt;Password:&nbsp;&lt;/td&gt;&lt;td&gt;&lt;input&nbsp;type="password"&nbsp;name="password"&nbsp;/&gt;&lt;/td&gt;&lt;/tr&gt;
+<br />&lt;tr&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;&lt;input&nbsp;type="submit"&nbsp;value="Login"&nbsp;name="login"&nbsp;/&gt;&lt;/td&gt;&lt;/tr&gt;
+
+<br />&lt;/table&gt;
+<br />&lt;/form&gt;
+<br />&lt;a&nbsp;href='register.php'&gt;Create&nbsp;an&nbsp;Account&lt;/a&gt;
+<br /><span style="color: #0000BB">&lt;?php
+<br />sdb_close_db</span><span style="color: #007700">();
+<br /></span><span style="color: #0000BB">?&gt;
+<br /></span>
+
+<br />---------------------member.php--------------------------&nbsp;
+<br />
+<br /><span style="color: #0000BB">&lt;?php
+<br />session_start</span><span style="color: #007700">();
+<br />if(isset(</span><span style="color: #0000BB">$_SESSION</span><span style="color: #007700">[</span><span style="color: #DD0000">'loggedin'</span><span style="color: #007700">]))
+<br />{
+<br />&nbsp;&nbsp;&nbsp;&nbsp;if(</span><span style="color: #0000BB">$_SESSION</span><span style="color: #007700">[</span><span style="color: #DD0000">'loggedin'</span><span style="color: #007700">]&nbsp;==&nbsp;</span><span style="color: #0000BB">1</span><span style="color: #007700">)
+
+<br />&nbsp;&nbsp;&nbsp;&nbsp;{
+<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<span style="color: #0000CC">sdb_init</span><span style="color: #006600">();
+<br />
+<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;require_once(</span><span style="color: #DD0000">"db.php"</span><span style="color: #007700">);
+<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">sdb_open_db</span><span style="color: #007700">(</span><span style="color: #DD0000">"user"</span><span style="color: #007700">);
+<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(!</span><span style="color: #0000BB">sdb_table_exist</span><span style="color: #007700">(</span><span style="color: #DD0000">"user"</span><span style="color: #007700">))
+<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{
+<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">sdb_query</span><span style="color: #007700">(</span><span style="color: #DD0000">"CREATE&nbsp;TABLE&nbsp;user&nbsp;(uid&nbsp;PKEY,username&nbsp;VARCHAR(99),password&nbsp;VARCHAR(99),email&nbsp;TEXT,gender&nbsp;VARCHAR(15),stid&nbsp;INT(99))"</span><span style="color: #007700">);
+
+<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;echo&nbsp;</span><span style="color: #DD0000">"&lt;h3&gt;Member&nbsp;Area&lt;/h3&gt;&lt;strong&gt;Username:&nbsp;&lt;/strong&gt;"</span><span style="color: #007700">.</span><span style="color: #0000BB">$_SESSION</span><span style="color: #007700">[</span><span style="color: #DD0000">'username'</span><span style="color: #007700">].</span><span style="color: #DD0000">"&lt;br/&gt;&lt;strong&gt;Email:&nbsp;&lt;/strong&gt;"</span><span style="color: #007700">.</span><span style="color: #0000BB">$_SESSION</span><span style="color: #007700">[</span><span style="color: #DD0000">'email'</span><span style="color: #007700">].</span><span style="color: #DD0000">"&lt;br/&gt;&lt;strong&gt;Student&nbsp;ID:&nbsp;&lt;/strong&gt;"</span><span style="color: #007700">.</span><span style="color: #0000BB">$_SESSION</span><span style="color: #007700">[</span><span style="color: #DD0000">'stid'</span><span style="color: #007700">].</span><span style="color: #DD0000">"&lt;br/&gt;&lt;a&nbsp;href=\"logoff.php\"&gt;Logoff&lt;/a&gt;"</span><span style="color: #007700">;
+
+<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<br />&nbsp;&nbsp;&nbsp;&nbsp;}
+<br />&nbsp;&nbsp;&nbsp;&nbsp;else
+<br />&nbsp;&nbsp;&nbsp;&nbsp;{
+<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">header</span><span style="color: #007700">(</span><span style="color: #DD0000">"Location:&nbsp;login.php"</span><span style="color: #007700">);
+<br />&nbsp;&nbsp;&nbsp;&nbsp;}
+<br />}
+<br />else
+<br />{
+<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">header</span><span style="color: #007700">(</span><span style="color: #DD0000">"Location:&nbsp;login.php"</span><span style="color: #007700">);
+
+<br />}
+<br /></span><span style="color: #0000BB">?&gt;
+<br /></span>
+<br />---------------------logoff.php--------------------------&nbsp;
+<br />
+<br /><span style="color: #0000BB">&lt;?php
+<br />session_start</span><span style="color: #007700">();
+<br /></span><span style="color: #0000BB">session_destroy</span><span style="color: #007700">();
+<br /></span><span style="color: #0000BB">header</span><span style="color: #007700">(</span><span style="color: #DD0000">"Location:&nbsp;login.php"</span><span style="color: #007700">);
+
+<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code>
+        </p>
+
+        
+    </div>
+    
+<hr />
+Copyright &copy; Sidd Panchal
+</div>
+
+
+</body>
+</html>

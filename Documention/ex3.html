@@ -1,0 +1,132 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Simple DataBase Documention</title>
+<link href="sdb_style.css" rel="stylesheet" type="text/css" />
+<style type="text/css">
+#main
+{
+	background:#FFF;
+	padding:5px;
+	height:100%;
+	border-bottom:1px dashed #999;
+	border-left:1px dashed #999;
+	border-right:1px dashed #999;
+}
+#main a
+{
+	color:#000;
+	border-bottom:1px dotted #000;
+	text-decoration:none;
+}
+#main a:hover
+{
+	text-decoration:underline;
+}
+.main_menu
+{
+	float:none;
+	text-align:center;
+	font-size:18px;
+}
+#header a
+{
+	text-decoration:none;
+}
+#header a:hover
+{
+	text-decoration:underline;
+}
+.header_style
+{
+	color:#090;
+}
+#info_func
+{
+	margin:10px;
+	background-color:#DEDEED;
+	padding:10px;
+}
+#info_des
+{
+	margin:10px;
+	background-color:#DEDEED;
+	border:#CCC;
+	padding:10px;
+}
+.example
+{
+	padding:5px;
+	background-color:#EFEFF6;
+	border:1px solid #C9C9C9;
+}
+</style>
+</head>
+<body>
+
+<div id="header">
+	<span class="main_menu">SDB (<span class="header_style">S</span>imple <span class="header_style">D</span>ata-<span class="header_style">B</span>ase) Manual</span>
+
+    <span style="margin-left:25px;"><a href="ex2.html">&laquo; Exapmple 2</a></span> | 
+    <span><a href="ex4.html">Exapmple 4 &raquo;</a></span> <span style="margin-left:20px"><a href="readme.html">(Home Page)</a></span>
+</div>
+
+<div id="main">
+
+	<h3>Example 3</h3>
+	    
+    <div id="info_des">
+
+    	<strong>Example 3: Checking for Malicious Data and escape from those</strong>
+	
+	<p class="example">
+
+		<code><span style="color: #000000">
+
+<br /><span style="color: #0000BB">&lt;?php
+<br /></span><span style="color: #007700">require_once(</span><span style="color: #DD0000">"db.php"</span><span style="color: #007700">);
+<br />
+<br /></span><span style="color: #0000CC">sdb_init</span><span style="color: #006600">();
+<br />
+<br /></span><span style="color: #0000BB">sdb_open_db</span><span style="color: #007700">(</span><span style="color: #DD0000">"database_name"</span><span style="color: #007700">);
+<br />
+<br />if(!</span><span style="color: #0000BB">sdb_table_exist</span><span style="color: #007700">(</span><span style="color: #DD0000">"table_name"</span><span style="color: #007700">))
+
+<br />{
+<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">sdb_query</span><span style="color: #007700">(</span><span style="color: #DD0000">"CREATE&nbsp;TABLE&nbsp;table_name&nbsp;(id&nbsp;PKEY,name&nbsp;VARCHAR(99),password&nbsp;VARCHAR(99),stid&nbsp;INT(99),status&nbsp;TEXT)"</span><span style="color: #007700">);
+<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #FF8000">//&nbsp;If&nbsp;table&nbsp;does&nbsp;not&nbsp;exist&nbsp;than&nbsp;create&nbsp;a&nbsp;table
+
+<br /></span><span style="color: #007700">}
+<br />
+<br /></span><span style="color: #0000BB">$status_one&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">'Hello&nbsp;"Me&nbsp;AND&nbsp;Him&nbsp;OR&nbsp;Him&nbsp;AND&nbsp;Me"'</span><span style="color: #007700">;
+<br /></span><span style="color: #0000BB">$status_two&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">"Hello&nbsp;'WHERE&nbsp;are&nbsp;you&nbsp;going?'"</span><span style="color: #007700">;
+
+<br />
+<br /></span><span style="color: #0000BB">$status_one&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">sdb_real_escape_string</span><span style="color: #007700">(</span><span style="color: #0000BB">sdb_replace_keywords</span><span style="color: #007700">(</span><span style="color: #0000BB">$status_one</span><span style="color: #007700">));
+<br /></span><span style="color: #FF8000">//&nbsp;Clean&nbsp;the&nbsp;first&nbsp;string
+<br /></span><span style="color: #0000BB">$status_two&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">sdb_real_escape_string</span><span style="color: #007700">(</span><span style="color: #0000BB">sdb_replace_keywords</span><span style="color: #007700">(</span><span style="color: #0000BB">$status_two</span><span style="color: #007700">));
+
+<br /></span><span style="color: #FF8000">//&nbsp;Clean&nbsp;the&nbsp;second&nbsp;string
+<br />
+<br /></span><span style="color: #0000BB">sdb_query</span><span style="color: #007700">(</span><span style="color: #DD0000">"INSERT&nbsp;INTO&nbsp;table_name&nbsp;(name,password,stid,status)&nbsp;VALUES&nbsp;('demo','demo','000000000','"</span><span style="color: #007700">.</span><span style="color: #0000BB">$status_one</span><span style="color: #007700">.</span><span style="color: #DD0000">"')"</span><span style="color: #007700">);
+
+<br /></span><span style="color: #0000BB">sdb_query</span><span style="color: #007700">(</span><span style="color: #DD0000">"INSERT&nbsp;INTO&nbsp;table_name&nbsp;(name,password,stid,status)&nbsp;VALUES&nbsp;('test','test','000000001','"</span><span style="color: #007700">.</span><span style="color: #0000BB">$status_two</span><span style="color: #007700">.</span><span style="color: #DD0000">"')"</span><span style="color: #007700">);
+<br />
+<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+
+</code>
+
+        </p>
+
+        
+    </div>
+    
+<hr />
+Copyright &copy; Sidd Panchal
+</div>
+
+
+</body>
+</html>

@@ -1,0 +1,117 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Simple DataBase Documention</title>
+<link href="sdb_style.css" rel="stylesheet" type="text/css" />
+<style type="text/css">
+#main
+{
+	background:#FFF;
+	padding:5px;
+	height:100%;
+	border-bottom:1px dashed #999;
+	border-left:1px dashed #999;
+	border-right:1px dashed #999;
+}
+#main a
+{
+	color:#000;
+	border-bottom:1px dotted #000;
+	text-decoration:none;
+}
+#main a:hover
+{
+	text-decoration:underline;
+}
+.main_menu
+{
+	float:none;
+	text-align:center;
+	font-size:18px;
+}
+#header a
+{
+	text-decoration:none;
+}
+#header a:hover
+{
+	text-decoration:underline;
+}
+.header_style
+{
+	color:#090;
+}
+#info_func
+{
+	margin:10px;
+	background-color:#DEDEED;
+	padding:10px;
+}
+#info_des
+{
+	margin:10px;
+	background-color:#DEDEED;
+	border:#CCC;
+	padding:10px;
+}
+.example
+{
+	padding:5px;
+	background-color:#EFEFF6;
+	border:1px solid #C9C9C9;
+}
+</style>
+</head>
+<body>
+
+<div id="header">
+	<span class="main_menu">SDB (<span class="header_style">S</span>imple <span class="header_style">D</span>ata-<span class="header_style">B</span>ase) Manual</span>
+
+    <span style="margin-left:25px;"><a href="readme.html">&laquo; HomePage</a></span> | 
+    <span><a href="sdb_close_db.html">sdb_close_db &raquo;</a></span> <span style="margin-left:20px"><a href="readme.html">(Home Page)</a></span>
+</div>
+
+<div id="main">
+
+	<h3>sdb_backup</h3>
+	<div id="info_func">
+
+<strong>sdb_backup ( string </strong>$database_name <strong>)</strong></div>
+    
+    <div id="info_des">
+    	<strong>Description:</strong>
+        <p class="example">sdb_open_db () - output the database content. It's good idea to backup database regularly incase you loose it</p>
+        <p><strong>Parameters:</strong></p>
+        <p class="example">$database_name | Input of valid database name and dataname must exist in the list before you backup it</p>
+  </div>
+    
+    <div id="info_des">
+
+    	<strong>Examples for sdb_backup</strong>
+	
+	<p class="example">
+		<strong>Example 1: Backup database</strong>
+<br/><br/>
+		<code><span style="color: #000000">
+<span style="color: #0000CC">&lt;?php&nbsp;
+<br /></span><span style="color: #006600">require_once(</span><span style="color: #CC0000">"db.php"</span><span style="color: #006600">);&nbsp;
+<br />
+<br /></span><span style="color: #0000CC">sdb_init</span><span style="color: #006600">();
+<br />
+<br /></span><span style="color: #0000CC">sdb_backup</span><span style="color: #006600">(</span><span style="color: #CC0000">"db_name"</span><span style="color: #006600">);&nbsp;
+<br /></span><span style="color: #0000CC">?&gt;</span>&nbsp;</span>
+</code>
+
+        </p>
+
+        
+    </div>
+    
+<hr />
+Copyright &copy; Sidd Panchal
+</div>
+
+
+</body>
+</html>
